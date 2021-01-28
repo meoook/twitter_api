@@ -3,9 +3,9 @@ import asyncio
 import pyppeteer
 import requests
 
-from twitter_api.request_utils.random_agent import UserAgentGenerator
-
 # Sanity checking.
+from request_utils.random_agent import UserAgentGenerator
+
 try:
     assert sys.version_info.major == 3
     assert sys.version_info.minor > 5

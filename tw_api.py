@@ -58,7 +58,7 @@ class TwitterApiV1(TwitterBase):
         _session.headers.update({'User-Agent': self.__user_agent_get_random()})
         try:
             _response = _session.get(self._URL_WEB)
-            _find_link = re.search(r'<link.*as=.script.*href=.(.*/main.*\.js)', _response.content.decode())
+            _find_link = re.search(r'<link.*as=.script.*href=.(.*/main.*\.js)', _response.text)
             _script_link = _find_link.group(1)
             time.sleep(0.5)  # Twitter rate limit
             _response = _session.get(_script_link)
@@ -83,7 +83,7 @@ class TwitterApiV1(TwitterBase):
 
 
 class TwitterApiV2(TwitterBase):
-    # FIXME: Class not finished - cos no test
+    # FIXME: Class not finished (check return) - cos no test
     #  tweet_type = tweet['referenced_tweets'][0]['type'] if 'referenced_tweets' in tweet else 'tweet'
     #  tweet_created = datetime.strptime(tweet['created_at'], "%Y-%m-%dT%H:%M:%S.%fZ")
     """ Twitter API 2.0 - enterprise access """

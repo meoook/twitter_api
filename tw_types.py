@@ -3,8 +3,8 @@ from datetime import datetime
 
 class TwUser:
     def __init__(self, tw_data: dict):
-        self.id = tw_data["id"]
-        self.name = tw_data["name"]
+        self.id = tw_data['id']
+        self.name = tw_data['name']
         self.name_display = tw_data['screen_name'] if 'screen_name' in tw_data else tw_data.get('username')
 
     @property
@@ -13,22 +13,21 @@ class TwUser:
 
     @property
     def url(self) -> str:
-        return f"https://twitter.com/{self.name_display}"
+        return f'https://twitter.com/{self.name_display}'
 
 
 class TwTweet:
     def __init__(self, tw_data: dict):
-        """ User id of board from where tweet taken """
-        _text = tw_data["full_text"] if "full_text" in tw_data else tw_data["text"]
-        self.id = tw_data["id_str"]
+        _text = tw_data.get('full_text') or tw_data.get('text', '')
+        self.id = tw_data['id_str']
         self.tw_type = self.__get_tw_type(tw_data)
-        self.text = _text.strip().replace("\n", "")
-        self.created_dt = datetime.strptime(tw_data["created_at"], "%a %b %d %H:%M:%S %z %Y")
+        self.text = _text.strip().replace('\n', '')
+        self.created_dt = datetime.strptime(tw_data['created_at'], "%a %b %d %H:%M:%S %z %Y")
         self.created = int(f'{self.created_dt.timestamp()}'.replace('.0', ''))
-        self.lang = tw_data["lang"]
-        _likes = int(tw_data.get("favorite_count", 0))
-        _relay = int(tw_data.get("reply_count", 0))
-        _retweet = int(tw_data.get("retweet_count", 0))
+        self.lang = tw_data['lang']
+        _likes = int(tw_data.get('favorite_count', 0))
+        _relay = int(tw_data.get('reply_count', 0))
+        _retweet = int(tw_data.get('retweet_count', 0))
         self.counts = {'like': _likes, 'relay': _relay, 'retweet': _retweet}
 
     def __repr__(self):
@@ -53,6 +52,3 @@ class TwTweet:
             return 'retweet'
         else:
             return 'tweet'
-
-
-

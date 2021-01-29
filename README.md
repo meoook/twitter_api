@@ -19,4 +19,3 @@
 | 0.01.01 | 28.01.21 | Realise API v1.1 - Full done                                       |
 
 [author]: <https://bazha.ru> "meok home page"
-

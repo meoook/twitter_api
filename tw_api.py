@@ -55,7 +55,6 @@ class TwitterApiV1(TwitterBase):
     def __get_g_token(self) -> str:
         """ Get guest token using virtual browser """
         _session = requests.session()
-        # TODO: self._agent or self.__user_agent_get_random()
         _session.headers.update({'User-Agent': self.__user_agent_get_random()})
         try:
             _response = _session.get(self._URL_WEB)

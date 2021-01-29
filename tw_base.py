@@ -59,7 +59,7 @@ class TwitterBase:
                 return True, _response.json()
             elif _code == 429:
                 # TODO: get more info about error
-                #  _response.text = {"account_id":1035595306539384832,
+                #  _response.text = {"account_id":123123123,
                 #  "product_name":"standard-basic",
                 #  "title":"UsageCapExceeded",
                 #  "period":"Monthly",

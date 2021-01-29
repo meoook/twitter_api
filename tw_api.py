@@ -2,7 +2,6 @@ import re
 import time
 import requests
 
-from .request_utils.web_session import WebSession
 from .tw_base import TwitterBase, logger
 from .tw_types import TwUser, TwTweet
 
@@ -55,7 +54,9 @@ class TwitterApiV1(TwitterBase):
 
     def __get_g_token(self) -> str:
         """ Get guest token using virtual browser """
-        _session = WebSession()
+        _session = requests.session()
+        # TODO: self._agent or self.__user_agent_get_random()
+        _session.headers.update({'User-Agent': self.__user_agent_get_random()})
         try:
             _response = _session.get(self._URL_WEB)
             _find_link = re.search(r'<link.*as=.script.*href=.(.*/main.*\.js)', _response.content.decode())
@@ -86,7 +87,6 @@ class TwitterApiV2(TwitterBase):
     # FIXME: Class not finished - cos no test
     #  tweet_type = tweet['referenced_tweets'][0]['type'] if 'referenced_tweets' in tweet else 'tweet'
     #  tweet_created = datetime.strptime(tweet['created_at'], "%Y-%m-%dT%H:%M:%S.%fZ")
-    #  self.__tweets[tweet_id] = {'type': tweet_type, 'time': tweet_created}
     """ Twitter API 2.0 - enterprise access """
     def __init__(self, enterprise_token):
         super().__init__()

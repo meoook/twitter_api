@@ -7,8 +7,6 @@
 
 ### Inside package
 
-Get Twitter user and tweets or single tweet
-
 - [x] Enterprise version - API 2.0
 - [x] Guest version - API 1.1
 - [x] Another guest version - API 1.1

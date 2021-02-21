@@ -35,9 +35,6 @@ class TwTweet:
         _retweet = int(tw_data.get('retweet_count', 0))
         self.counts = {'like': _likes, 'relay': _relay, 'retweet': _retweet}
 
-    def __repr__(self):
-        return f'<TwTweet {self.id}>'
-
     @property
     def data(self) -> dict[str, any]:
         return {
@@ -58,3 +55,6 @@ class TwTweet:
             return 'reply' if tw_data.get('self_thread') else 'quote'
         else:
             return 'comment' if tw_data.get('self_thread') else 'tweet'
+
+    def __repr__(self):
+        return f'<TwTweet {self.id}>'

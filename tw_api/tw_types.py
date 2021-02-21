@@ -2,6 +2,7 @@ from datetime import datetime
 
 
 class TwUser:
+    """ Data type to serialize user profile """
     def __init__(self, tw_data: dict):
         self.id = tw_data['id']
         self.name = tw_data['name']

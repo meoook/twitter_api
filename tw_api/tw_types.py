@@ -20,6 +20,7 @@ class TwUser:
 
 
 class TwTweet:
+    """ Data type to serialize tweet """
     def __init__(self, tw_data: dict):
         _text = tw_data.get('full_text') or tw_data.get('text', '')
         self.id = tw_data['id_str']

@@ -15,6 +15,9 @@ class TwUser:
     def url(self) -> str:
         return f'https://twitter.com/{self.name_display}'
 
+    def __repr__(self):
+        return f'<TwUser {self.name_display}>'
+
 
 class TwTweet:
     def __init__(self, tw_data: dict):
@@ -46,9 +49,10 @@ class TwTweet:
 
     @staticmethod
     def __get_tw_type(tw_data: dict):
-        if tw_data.get('is_quote_status'):
-            return 'quote'
-        elif tw_data.get('retweeted_status_id_str'):
+        """ Replay and comment - when done by self user """
+        if tw_data.get('retweeted_status_id_str'):
             return 'retweet'
+        elif tw_data.get('is_quote_status'):
+            return 'reply' if tw_data.get('self_thread') else 'quote'
         else:
-            return 'tweet'
+            return 'comment' if tw_data.get('self_thread') else 'tweet'

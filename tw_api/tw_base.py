@@ -3,8 +3,8 @@ import logging
 
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
-from twitter_api import TwUser, TwTweet
-from twitter_api.request_utils.random_agent import UserAgentGenerator
+from .tw_types import TwUser, TwTweet
+from .random_agent import UserAgentGenerator
 
 logger = logging.getLogger('twitter.api')
 
